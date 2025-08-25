@@ -38,8 +38,12 @@ SmartApply-clean/
 ├── Specification/                # Spezifikationen
 │
 ├── pyproject.toml               # Modernes Packaging
-├── requirements.txt             # Produktions-Abhängigkeiten
-├── requirements-dev.txt         # Entwicklungs-Abhängigkeiten
+├── requirements/                # Dependency Management
+│   ├── base.in                 # Loose version constraints
+│   ├── base.txt                # Pinned production dependencies
+│   ├── development.txt         # Development tools
+│   ├── production.txt          # Production deployment
+│   └── README.md              # Dependency management guide
 ├── test_keyword_extraction.py   # Demo-Skript
 ├── KEYWORD_EXTRACTION_README.md # Funktionsdokumentation
 └── PROJECT_STRUCTURE_README.md  # Diese Datei
@@ -49,9 +53,12 @@ SmartApply-clean/
 
 1. **✅ Migration zu src/ Layout**: Alle Module sind jetzt unter `src/smartapply/`
 2. **✅ PyProject.toml erstellt**: Modernes Packaging mit PEP 518
-3. **✅ Requirements getrennt**: 
-   - `requirements.txt` für Produktion
-   - `requirements-dev.txt` für Entwicklung
+3. **✅ Requirements modernisiert**: 
+   - Modernes pip-tools Setup mit `requirements/` Verzeichnis
+   - `base.in` für loose constraints
+   - `base.txt` für pinned production dependencies
+   - `development.txt` für Entwicklungstools
+   - `production.txt` für Produktionsdeployment
 4. **✅ Import-Pfade angepasst**: Alle Tests und Skripte verwenden neue Pfade
 
 ## 🔧 Test-Struktur
@@ -67,8 +74,11 @@ Die Tests sind organisiert als:
 # Installation
 pip install -e .
 
-# Entwicklungsumgebung
-pip install -r requirements-dev.txt
+# Entwicklungsumgebung (empfohlen)
+pip install -r requirements/development.txt
+
+# Produktionsumgebung
+pip install -r requirements/production.txt
 
 # Tests ausführen
 python -m unittest discover tests/unit/

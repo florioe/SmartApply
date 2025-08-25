@@ -1,0 +1,160 @@
+# Base requirements - common dependencies for all environments
+# This file is generated from pyproject.toml using pip-tools
+
+# To update: pip-compile requirements/base.in --output-file=requirements/base.txt
+# To install: pip install -r requirements/base.txt
+
+aiohttp==3.12.15
+    # via -r requirements/base.in
+aiosignal==1.4.0
+    # via aiohttp
+annotated-types==0.7.0
+    # via pydantic
+anyio==4.10.0
+    # via httpx
+attrs==25.3.0
+    # via aiohttp
+beautifulsoup4==4.13.4
+    # via -r requirements/base.in
+certifi==2025.8.3
+    # via httpx
+    # via requests
+charset-normalizer==3.4.3
+    # via requests
+dataclasses-json==0.6.7
+    # via langchain-community
+distro==1.9.0
+    # via openai
+frozenlist==1.7.0
+    # via aiohttp
+fuzzywuzzy==0.18.0
+    # via langchain-community
+h11==0.16.0
+    # via httpcore
+httpcore==1.0.9
+    # via httpx
+httpx==0.28.1
+    # via -r requirements/base.in
+    # via langchain-community
+httpx-sse==0.4.1
+    # via openai
+idna==3.10
+    # via httpx
+    # via requests
+jiter==0.10.0
+    # via pydantic-core
+joblib==1.5.1
+    # via scikit-learn
+jsonpatch==1.33
+    # via langchain
+jsonpointer==3.0.0
+    # via jsonpatch
+langchain==0.3.27
+    # via -r requirements/base.in
+langchain-community==0.3.27
+    # via langchain
+langchain-core==0.3.74
+    # via langchain
+    # via langchain-community
+langchain-openai==0.3.31
+    # via langchain-community
+langchain-text-splitters==0.3.9
+    # via langchain-community
+langsmith==0.4.15
+    # via langchain
+lxml==6.0.0
+    # via -r requirements/base.in
+Markdown==3.8.2
+    # via langchain
+marshmallow==3.26.1
+    # via dataclasses-json
+multidict==6.6.4
+    # via aiohttp
+mypy_extensions==1.1.0
+    # via langchain
+numpy==2.3.2
+    # via -r requirements/base.in
+    # via pandas
+    # via scikit-learn
+    # via scipy
+openai==1.101.0
+    # via -r requirements/base.in
+    # via langchain-openai
+orjson==3.11.2
+    # via langsmith
+packaging==25.0
+    # via langchain
+    # via langsmith
+    # via openai
+    # via pydantic
+propcache==0.3.2
+    # via langchain
+pydantic==2.11.7
+    # via langchain
+    # via langchain-core
+    # via langsmith
+pydantic-settings==2.10.1
+    # via langchain
+pydantic_core==2.33.2
+    # via pydantic
+pypandoc==1.15
+    # via langchain-community
+python-docx==1.2.0
+    # via -r requirements/base.in
+python-dotenv==1.1.1
+    # via -r requirements/base.in
+PyYAML==6.0.2
+    # via langchain
+RapidFuzz==3.13.0
+    # via thefuzz
+regex==2025.7.34
+    # via tiktoken
+requests==2.32.4
+    # via -r requirements/base.in
+    # via langchain
+    # via langchain-community
+    # via langsmith
+requests-toolbelt==1.0.0
+    # via langchain-community
+scikit-learn==1.7.1
+    # via -r requirements/base.in
+scipy==1.16.1
+    # via scikit-learn
+sniffio==1.3.1
+    # via anyio
+    # via httpx
+soupsieve==2.7
+    # via beautifulsoup4
+SQLAlchemy==2.0.43
+    # via langchain-community
+striprtf==0.0.29
+    # via langchain-community
+tenacity==9.1.2
+    # via langchain
+thefuzz==0.22.1
+    # via langchain-community
+threadpoolctl==3.6.0
+    # via scikit-learn
+tiktoken==0.11.0
+    # via -r requirements/base.in
+    # via langchain
+    # via openai
+tqdm==4.67.1
+    # via langchain
+    # via openai
+typing-inspect==0.9.0
+    # via langchain
+typing-inspection==0.4.1
+    # via langchain
+typing_extensions==4.14.1
+    # via langchain
+    # via langchain-core
+    # via langsmith
+    # via openai
+    # via pydantic
+urllib3==2.5.0
+    # via requests
+yarl==1.20.1
+    # via aiohttp
+zstandard==0.24.0
+    # via langchain-community

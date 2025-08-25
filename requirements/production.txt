@@ -1,0 +1,8 @@
+# Production requirements - minimal dependencies for production deployment
+# This file includes only the essential dependencies needed in production
+
+# Include base requirements (pinned versions for production)
+-r base.txt
+
+# Note: Production environment should use pinned versions from base.txt
+# No additional dependencies are needed for production beyond the base set

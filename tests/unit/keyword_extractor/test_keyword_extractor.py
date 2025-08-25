@@ -1,8 +1,8 @@
 import os
 import unittest
 import sys
-sys.path.append("..")
-from keyword_extractor.keyword_extractor import extract_keywords_from_html
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+from src.smartapply.keyword_extractor.keyword_extractor import extract_keywords_from_html
 
 class TestKeywordExtractor(unittest.TestCase):
 
