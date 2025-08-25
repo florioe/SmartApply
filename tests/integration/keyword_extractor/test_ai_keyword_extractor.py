@@ -1,6 +1,9 @@
 import unittest
 import os
-from keyword_extractor.keyword_extractor import extract_keywords_with_ai
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../.."))  # Adjust for src layout
+
+from src.smartapply.keyword_extractor.keyword_extractor import extract_keywords_with_ai
 
 class TestAIKeywordExtractor(unittest.TestCase):
 
