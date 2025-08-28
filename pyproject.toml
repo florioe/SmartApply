@@ -77,7 +77,6 @@ Issues = "https://github.com/florioe/SmartApply/issues"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-packages = {find = {where = ["src"]}}
 
 [tool.setuptools.packages.find]
 where = ["src"]
