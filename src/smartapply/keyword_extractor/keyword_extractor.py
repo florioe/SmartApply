@@ -39,66 +39,61 @@ def extract_keywords_from_html(html_content: str, language: str = 'en') -> Set[s
     Returns:
         Set of extracted keywords with original casing preserved
     """
-    try:
-        if not html_content or html_content.strip() == "":
-            logger.warning("Empty HTML content provided")
-            return set()
-            
-        # Load appropriate spaCy model
-        if language not in LANGUAGE_MODELS:
-            logger.warning(f"Unsupported language: {language}. Defaulting to English.")
-            language = 'en'
-            
-        try:
-            nlp = spacy.load(LANGUAGE_MODELS[language])
-        except OSError:
-            logger.error(f"spaCy model {LANGUAGE_MODELS[language]} not installed. "
-                        f"Please run: python -m spacy download {LANGUAGE_MODELS[language]}")
-            return set()
-            
-        soup = BeautifulSoup(html_content, 'html.parser')
-        
-        # Remove structural elements using predefined constants
-        for element in soup.find_all(STRUCTURAL_ELEMENTS):
-            element.decompose()
-        
-        # Remove structural elements by CSS selectors
-        for selector in STRUCTURAL_SELECTORS:
-            for element in soup.select(selector):
-                element.decompose()
-        
-        # Extract clean text content
-        text = soup.get_text(separator='\n', strip=True)
-        
-        if not text or text.strip() == "":
-            logger.warning("No meaningful text content found in HTML")
-            return set()
-        
-        # Clean up text while preserving special characters for both languages
-        text = re.sub(r'\n\s*\n', '\n', text)  # Remove multiple empty lines
-        text = re.sub(r'\s+', ' ', text)       # Normalize whitespace
-        
-        logger.info(f"Processing {language.upper()} text of length: {len(text)} characters")
-        
-        # Process text with spaCy
-        doc = nlp(text)
-        
-        # Extract meaningful keywords (nouns, proper nouns, verbs)
-        keywords = set()
-        for token in doc:
-            if (token.pos_ in ["NOUN", "PROPN", "VERB"] and 
-                not token.is_stop and 
-                not token.is_punct and
-                len(token.text) > 2):
-                # Keep original casing for better readability
-                keywords.add(token.text)
-        
-        logger.info(f"Extracted {len(keywords)} keywords using spaCy {language.upper()} model")
-        return keywords
-        
-    except Exception as e:
-        logger.error(f"Error extracting keywords from HTML: {e}")
+    if not html_content or html_content.strip() == "":
+        logger.warning("Empty HTML content provided")
         return set()
+        
+    # Load appropriate spaCy model
+    if language not in LANGUAGE_MODELS:
+        logger.warning(f"Unsupported language: {language}. Defaulting to English.")
+        language = 'en'
+        
+    try:
+        nlp = spacy.load(LANGUAGE_MODELS[language])
+    except OSError:
+        logger.error(f"spaCy model {LANGUAGE_MODELS[language]} not installed. "
+                    f"Please run: python -m spacy download {LANGUAGE_MODELS[language]}")
+        return set()
+        
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    # Remove structural elements using predefined constants
+    for element in soup.find_all(STRUCTURAL_ELEMENTS):
+        element.decompose()
+    
+    # Remove structural elements by CSS selectors
+    for selector in STRUCTURAL_SELECTORS:
+        for element in soup.select(selector):
+            element.decompose()
+    
+    # Extract clean text content
+    text = soup.get_text(separator='\n', strip=True)
+    
+    if not text or text.strip() == "":
+        logger.warning("No meaningful text content found in HTML")
+        return set()
+    
+    # Clean up text while preserving special characters for both languages
+    text = re.sub(r'\n\s*\n', '\n', text)  # Remove multiple empty lines
+    text = re.sub(r'\s+', ' ', text)       # Normalize whitespace
+    
+    logger.info(f"Processing {language.upper()} text of length: {len(text)} characters")
+    
+    # Process text with spaCy
+    doc = nlp(text)
+    
+    # Extract meaningful keywords (nouns, proper nouns, verbs)
+    keywords = set()
+    for token in doc:
+        if (token.pos_ in ["NOUN", "PROPN", "VERB"] and 
+            not token.is_stop and 
+            not token.is_punct and
+            len(token.text) > 2):
+            # Keep original casing for better readability
+            keywords.add(token.text)
+    
+    logger.info(f"Extracted {len(keywords)} keywords using spaCy {language.upper()} model")
+    return keywords
 
 def extract_keywords_with_ai(keywords: Set[str], original_text: str = "", 
                            model: str = "gpt-3.5-turbo", return_categorized: bool = False) -> Set[str]:
@@ -259,7 +254,7 @@ def detect_language(text: str) -> str:
     # Common German words (including umlauts)
     german_indicators = ['der', 'die', 'das', 'und', 'für', 'mit', 'von', 'zu', 'auf', 'ist', 'sind', 
                         'wir', 'sie', 'ich', 'du', 'er', 'es', 'einer', 'eine', 'einem', 'einen',
-                        'über', 'unter', 'zwischen', 'durch', 'wegen', 'während', 'seit', 'bis',
+                        'über', 'under', 'zwischen', 'durch', 'wegen', 'während', 'seit', 'bis',
                         'ä', 'ö', 'ü', 'ß']  # German umlauts and eszett
     
     # Common English words  
